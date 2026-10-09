@@ -1,0 +1,15 @@
+# Staging workspace: shared copy in a fixed folder; trips dashboard only.
+targets:
+  staging:
+    mode: production
+    workspace:
+      host: https://<your-staging-workspace>.cloud.databricks.com   # replace with your staging workspace URL
+      root_path: /Workspace/Deployments/${bundle.name}/${bundle.target}   # fixed folder; do not change after the first deploy
+    variables:
+      protect: true                                # block deletes/recreates while defined; removing from the target retires it
+      catalog: samples                             # point these at your data
+      schema: nyctaxi
+      name_suffix: " (Staging)"
+    resources:
+      dashboards:
+        nyctaxi_trips: ${var.dash_nyctaxi_trips}

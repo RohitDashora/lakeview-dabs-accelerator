@@ -1,0 +1,25 @@
+# Bundle root: name, CLI version, includes and the shared variables every target can override.
+bundle:
+  name: lakeview_dabs                              # part of every deployed path; do not rename after the first deploy
+  databricks_cli_version: ">= 1.20.0, < 1.21.0"     # everyone (laptops and CI) uses the same CLI version
+
+include:
+  - dashboards/*/dashboard.yml                     # dashboard definitions (dash_* variables)
+  - targets/*.yml                                  # one file per workspace
+
+permissions:                                       # admins manage everything; viewers are set per dashboard
+  - group_name: admins
+    level: CAN_MANAGE
+
+variables:
+  catalog:      { description: "Catalog the dashboards read from", default: samples }
+  schema:       { description: "Schema the dashboards read from", default: nyctaxi }
+  warehouse_id:
+    description: "SQL warehouse, looked up by name in each workspace (a warehouse with this name must exist)"
+    lookup: { warehouse: "Serverless Starter Warehouse" }
+  viewers:
+    description: "Who can view each dashboard"
+    type: complex
+    default: [ { group_name: users, level: CAN_RUN } ]
+  protect:      { description: "Blocks deleting or recreating dashboards still defined in the bundle, and bundle destroy (prevent_destroy); only dev turns it off", default: true }
+  name_suffix:  { description: "Optional text added to display names in a workspace", default: "" }

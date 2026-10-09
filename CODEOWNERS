@@ -1,0 +1,11 @@
+# Replace every @your-org/... handle with your own teams. The last matching line wins.
+*                         @your-org/cicd
+/databricks.yml           @your-org/cicd
+/CODEOWNERS               @your-org/cicd
+/README.md                @your-org/cicd
+
+/dashboards/              @your-org/dashboard-builders
+/docs/BYO-DASHBOARDS.md   @your-org/dashboard-builders
+
+/targets/                 @your-org/platform-ops
+/docs/RUNBOOK.md          @your-org/platform-ops

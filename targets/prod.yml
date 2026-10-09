@@ -1,0 +1,16 @@
+# Prod workspace: shared copy in a fixed folder; both dashboards.
+targets:
+  prod:
+    mode: production
+    workspace:
+      host: https://<your-prod-workspace>.cloud.databricks.com   # replace with your prod workspace URL
+      root_path: /Workspace/Deployments/${bundle.name}/${bundle.target}   # fixed folder; do not change after the first deploy
+    variables:
+      protect: true                                # block deletes/recreates while defined; removing from the target retires it
+      catalog: samples                             # point these at your data
+      schema: nyctaxi
+      nyctaxi_zones_viewers: [ { group_name: users, level: CAN_READ } ]   # example override: zones is view-only here
+    resources:
+      dashboards:
+        nyctaxi_trips: ${var.dash_nyctaxi_trips}
+        nyctaxi_zones: ${var.dash_nyctaxi_zones}

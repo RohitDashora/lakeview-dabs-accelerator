@@ -1,0 +1,20 @@
+# Track only the files that make up this repo; everything else at the top level is ignored.
+# To track a new top-level path (for example your CI folder), add a "!/<path>" line.
+/*
+!/.gitignore
+!/CODEOWNERS
+!/README.md
+!/databricks.yml
+!/dashboards/
+!/targets/
+
+# docs/: only the three guides. To track a new docs/*.md file, add a "!/docs/<file>" line.
+!/docs/
+/docs/*
+!/docs/REPO-STRUCTURE.md
+!/docs/BYO-DASHBOARDS.md
+!/docs/RUNBOOK.md
+
+# Local Databricks CLI cache: never commit it.
+.databricks/
+.DS_Store

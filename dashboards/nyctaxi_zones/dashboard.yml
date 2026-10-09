@@ -1,0 +1,18 @@
+# Defines the zones dashboard once. Targets assign it with: nyctaxi_zones: ${var.dash_nyctaxi_zones}
+variables:
+  nyctaxi_zones_viewers:                           # a per-dashboard setting a target may override
+    description: "Who can view this dashboard (defaults to the shared viewers)"
+    type: complex
+    default: ${var.viewers}
+  dash_nyctaxi_zones:
+    description: "Definition of 'NYC Taxi Pickup Zip Insights'"
+    type: complex
+    default:
+      display_name: "NYC Taxi Pickup Zip Insights${var.name_suffix}"
+      file_path: ./nyctaxi_zones.lvdash.json
+      warehouse_id: ${var.warehouse_id}
+      dataset_catalog: ${var.catalog}
+      dataset_schema: ${var.schema}
+      embed_credentials: false
+      permissions: ${var.nyctaxi_zones_viewers}
+      lifecycle: { prevent_destroy: "${var.protect}" }

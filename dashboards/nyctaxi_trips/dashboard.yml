@@ -1,0 +1,14 @@
+# Defines the trips dashboard once. Targets assign it with: nyctaxi_trips: ${var.dash_nyctaxi_trips}
+variables:
+  dash_nyctaxi_trips:                              # dash_<key>: <key> matches the folder name
+    description: "Definition of 'NYC Taxi Trip Overview'"
+    type: complex
+    default:
+      display_name: "NYC Taxi Trip Overview${var.name_suffix}"
+      file_path: ./nyctaxi_trips.lvdash.json       # relative to this file
+      warehouse_id: ${var.warehouse_id}
+      dataset_catalog: ${var.catalog}              # where the unqualified table names in the JSON are read from
+      dataset_schema: ${var.schema}
+      embed_credentials: false                     # viewers use their own data permissions
+      permissions: ${var.viewers}
+      lifecycle: { prevent_destroy: "${var.protect}" }

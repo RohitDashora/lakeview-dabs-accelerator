@@ -1,0 +1,15 @@
+# Dev workspace: each person deploys their own "[dev <name>]" copy.
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://<your-dev-workspace>.cloud.databricks.com   # replace with your dev workspace URL
+    variables:
+      protect: false                               # personal dev copies can be deleted
+      catalog: samples                             # point these at your data
+      schema: nyctaxi
+    resources:
+      dashboards:
+        nyctaxi_trips: ${var.dash_nyctaxi_trips}
+        nyctaxi_zones: ${var.dash_nyctaxi_zones}
